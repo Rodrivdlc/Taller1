@@ -1,47 +1,40 @@
 package com.example.taller1
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.taller1.ui.theme.Taller1Theme
 
-class SettingsActivity : ComponentActivity() {
+import android.content.Intent
+import android.graphics.Color
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
+import android.widget.LinearLayout
+
+class SettingsActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            Taller1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting3(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContentView(R.layout.activity_settings)
+
+        // Referencia al layout para cambiar el color de fondo
+        val layout = findViewById<LinearLayout>(R.id.layout)
+
+        // Referencias a los botones
+        val colorButtonRojo = findViewById<Button>(R.id.colorButtonRojo)
+        val colorButtonAzul = findViewById<Button>(R.id.colorButtonAzul)
+        val volverInicioButton = findViewById<Button>(R.id.volverInicioButton)
+
+        // Eventos de los botones para cambiar el color de fondo
+        colorButtonRojo.setOnClickListener {
+            layout.setBackgroundColor(Color.RED)
         }
-    }
-}
 
-@Composable
-fun Greeting3(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        colorButtonAzul.setOnClickListener {
+            layout.setBackgroundColor(Color.BLUE)
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview3() {
-    Taller1Theme {
-        Greeting3("Android")
+        // Evento del botón para volver a la pantalla de inicio
+        volverInicioButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
