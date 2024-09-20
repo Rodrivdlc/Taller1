@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Taller1</string>
+    <string name="title_activity_main_user">MainUserActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 </resources>
