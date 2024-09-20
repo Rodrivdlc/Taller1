@@ -1,47 +1,35 @@
 package com.example.taller1
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.taller1.ui.theme.Taller1Theme
 
-class MainUserActivity : ComponentActivity() {
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.content.Intent
+
+class MainUserActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            Taller1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting2(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContentView(R.layout.activity_main_user)
+
+        // Referencias a los componentes de la interfaz
+        val nombreEditText = findViewById<EditText>(R.id.nombreEditText)
+        val guardarButton = findViewById<Button>(R.id.guardarButton)
+        val nombreTextView = findViewById<TextView>(R.id.nombreTextView)
+        val irAConfiguracionButton = findViewById<Button>(R.id.irAConfiguracionButton)
+
+        // Evento del botón "Guardar Nombre"
+        guardarButton.setOnClickListener {
+            val nombre = nombreEditText.text.toString()
+            nombreTextView.text = nombre
         }
-    }
-}
 
-@Composable
-fun Greeting2(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview2() {
-    Taller1Theme {
-        Greeting2("Android")
+        // Evento del botón para ir a la pantalla de configuración
+        irAConfiguracionButton.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
